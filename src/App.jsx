@@ -9,32 +9,32 @@ import Section from "./components/Section";
 import Footer from "./components/Footer";
 import LocomotiveScroll from "locomotive-scroll";
 import gsap from "gsap/all";
-import "./locomotive-scroll.css"; // Import the CSS file
+import "./locomotive-scroll.css";
 
 function App() {
-  const mouse = useRef(null);
-  const scrollContainer = useRef(null);
+  // const mouse = useRef(null);
+  // const scrollContainer = useRef(null);
 
-  useEffect(() => {
-    const scroll = new LocomotiveScroll({
-      el: scrollContainer.current,
-      smooth: true,
-    });
+  // useEffect(() => {
+  //   const scroll = new LocomotiveScroll({
+  //     el: scrollContainer.current,
+  //     smooth: true,
+  //   });
 
-    const handleMouseMove = (e) => {
-      gsap.to(mouse.current, {
-        x: e.clientX,
-        y: e.clientY,
-      });
-    };
+  //   const handleMouseMove = (e) => {
+  //     gsap.to(mouse.current, {
+  //       x: e.clientX,
+  //       y: e.clientY,
+  //     });
+  //   };
 
-    window.addEventListener("mousemove", handleMouseMove);
+  //   window.addEventListener("mousemove", handleMouseMove);
 
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      scroll.destroy(); // Clean up LocomotiveScroll instance
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("mousemove", handleMouseMove);
+  //     scroll.destroy(); // Clean up LocomotiveScroll instance
+  //   };
+  // }, []);
 
   return (
     <div className="w-full h-fit relative bg-black" ref={scrollContainer}>
