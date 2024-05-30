@@ -12,10 +12,19 @@ import gsap from "gsap/all";
 
 function App() {
   const mouse = useRef(null);
-
-  const locomotiveScroll = new LocomotiveScroll();
+  const scrollContainer = useRef(null);
 
   useEffect(() => {
+    let locomotiveScroll;
+
+    if (window.innerWidth > 768) {
+      // Only initialize on desktop
+      locomotiveScroll = new LocomotiveScroll({
+        el: scrollContainer.current,
+        smooth: true,
+      });
+    }
+
     const handleMouseMove = (e) => {
       gsap.to(mouse.current, {
         x: e.clientX,
@@ -26,12 +35,15 @@ function App() {
     window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
+      if (locomotiveScroll) {
+        locomotiveScroll.destroy();
+      }
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
   return (
-    <div className="w-full h-fit relative bg-black">
+    <div className="w-full h-fit relative bg-black" ref={scrollContainer}>
       <div
         ref={mouse}
         data-scroll
